@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interview Simulation | PreppedAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.8);
+        }
+        .ai-glow {
+            box-shadow: 0 0 40px -10px rgba(188, 198, 224, 0.3);
+        }
+        .waveform-bar {
+            transition: height 0.1s ease-in-out;
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(235, 192, 124, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(235, 192, 124, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(235, 192, 124, 0); }
+        }
+        .recording-pulse {
+            animation: pulse-gold 2s infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d8e2ff",
+                        "surface-container-lowest": "#010f1f",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-container": "#231500",
+                        "inverse-on-surface": "#233143",
+                        "on-primary": "#283044",
+                        "surface-variant": "#273647",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-secondary-container": "#e6ecff",
+                        "on-primary-container": "#798098",
+                        "surface": "#051424",
+                        "tertiary-fixed-dim": "#ebc07c",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-container": "#0566d9",
+                        "on-surface-variant": "#c6c6cd",
+                        "on-secondary": "#002e6a",
+                        "surface-container": "#122131",
+                        "outline": "#909097",
+                        "inverse-surface": "#d4e4fa",
+                        "outline-variant": "#45464d",
+                        "surface-dim": "#051424",
+                        "secondary": "#adc6ff",
+                        "on-tertiary-container": "#9f7b3e",
+                        "on-surface": "#d4e4fa",
+                        "surface-container-highest": "#273647",
+                        "tertiary-fixed": "#ffdeac",
+                        "surface-container-low": "#0d1c2d",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#1c2b3c",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-tint": "#bec6e0",
+                        "primary": "#bec6e0",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#281900",
+                        "surface-bright": "#2c3a4c",
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-primary": "#565e74",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#001a42",
+                        "tertiary": "#ebc07c",
+                        "on-background": "#d4e4fa",
+                        "primary-container": "#0f172a",
+                        "on-tertiary": "#432c00",
+                        "background": "#051424",
+                        "on-tertiary-fixed-variant": "#5e4108"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant dark:border-outline-variant backdrop-blur-xl bg-surface-container/80 shadow-sm h-20">
+<div class="flex justify-between items-center px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-12">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">PreppedAI</span>
+<nav class="hidden md:flex items-center gap-8 font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 font-semibold hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Practice</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Resources</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Feedback</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors active:scale-95">settings</button>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-full font-label-md active:scale-95 transition-transform">Prepare</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A professional studio headshot of a confident male executive in his late 30s. He is wearing a crisp white shirt and a navy blue blazer, set against a blurred corporate office background. The lighting is soft and directional, highlighting his friendly yet authoritative expression. The color palette is dominated by professional blues and clean whites, aligning with a high-end corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkV7zHNOPyrRoqdRH03RIysozEbVhyWgZUq25McEQjM9QdOVZQIe_2cI2rf2lqY6GsHn5qrrxeMtyd-HvfQ_rcnIuTDTbLo6Jbx_jmGnrwfMFlOfjq9VAOcLs_-Nm_tCNzZAarYNlVDq_shX0JyIKrQ8KZTn2zRJT_9I1WUunuznJAbIAoDv2FK4wDJUDNuN0-dx8U-_K3ucRnNbwreDrlxVZ-Nw_epencJT6FAvQvAqdr-cduEaGi1NLakDUW0KlWAMcZh2Qdedwx"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Active Simulation Canvas -->
+<main class="flex-grow pt-20 relative flex flex-col items-center justify-center bg-background">
+<!-- Main AI Persona Display -->
+<div class="relative w-full h-full max-w-[1440px] flex items-center justify-center px-margin-desktop py-8">
+<div class="relative aspect-video w-full max-w-5xl rounded-xl overflow-hidden border border-outline-variant shadow-2xl ai-glow">
+<!-- AI Video Stream Placeholder -->
+<img class="w-full h-full object-cover" data-alt="A high-fidelity cinematic portrait of a professional female HR executive in her early 40s. She is seated in a modern, glass-walled office with a soft-focus city skyline in the background. She wears a charcoal grey tailored suit and has an empathetic, focused expression directed at the camera. The lighting is sophisticated, using a classic three-point setup to create a sense of expert mentorship and authority. The overall mood is composed, intelligent, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjkasnDcF0SWOJezMLO9eOlWK8SP4wiHAIRoUFY-Az7gy0zqAxa6OjzzFFqWg18hgRNeK_MijW5i_CNSTyO5oNkUSyaUeq7X6uRlG4aAcCzlQHknaJTZGrOnIMGq2eLa86aJE0Q6mFQqO7pVLNQwwmdsxJJqXKdm70SbMS01TqVyBfYJ5ntED4NI6YhefAcT5BZRCvelRJongJMH_USqPFPY9Zt3Z2BGzkIBljBJgVElazWsUrgJAI5iFwHy5eaMl-fhLNWcMOw9Lp"/>
+<!-- AI Name Overlay -->
+<div class="absolute bottom-6 left-6 glass-panel px-4 py-2 rounded-lg flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary recording-pulse"></div>
+<span class="font-label-caps text-on-surface uppercase tracking-widest">Sarah • AI Mentor</span>
+</div>
+<!-- Mirror Feed (User) -->
+<div class="absolute top-6 right-6 w-48 aspect-[3/4] md:w-64 md:aspect-video rounded-lg overflow-hidden border-2 border-primary/30 shadow-xl glass-panel">
+<img class="w-full h-full object-cover grayscale-[20%]" data-alt="A small camera feed showing a professional male candidate participating in a video call. He is centered in the frame, wearing a formal dress shirt and seated in a minimalist home office with clean lines and soft ambient lighting. The perspective is from a laptop webcam, creating an authentic simulation of a remote interview environment. The color tones are warm and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLV-EoOKEL5QP_BBNQiFX5wAnvHKLVM6YUzbsRQAfne4BmVmZWZfyqCR_MND4pQ4MR8YKt0JmNA0UBF2n86z8nXkaqWiDgFnT9oJH1mMMUF6WPIAzJsaLLmnKVMvwzAid3LzaA1gt2y7c8vfkbVvgqZS6CFCAW9YqeDAARo5fRtCHuwD886CSy-0zZb-8gPSrltP20XWmLmCs9FouUWRnbzHpeoSDgtJ2VgTnClUOLgDslVzqNvb6JEmrI5wDPreLEVwYnLxn0_l3p"/>
+<div class="absolute bottom-2 left-2 bg-black/40 px-2 py-1 rounded text-[10px] font-label-caps text-white">YOU</div>
+</div>
+</div>
+</div>
+<!-- Minimal Interaction Controls -->
+<div class="absolute bottom-12 w-full max-w-4xl px-6 flex flex-col items-center gap-8">
+<!-- Progress & Stats -->
+<div class="flex items-center gap-12 glass-panel px-8 py-4 rounded-full border border-outline-variant">
+<div class="flex flex-col items-center">
+<span class="font-label-caps text-on-surface-variant mb-1">PROGRESS</span>
+<span class="font-headline-md text-primary">Question 12 <span class="text-on-surface-variant font-normal">of 20</span></span>
+</div>
+<div class="w-px h-10 bg-outline-variant"></div>
+<div class="flex flex-col items-center">
+<span class="font-label-caps text-on-surface-variant mb-1">DURATION</span>
+<span class="font-headline-md text-on-surface">14:22</span>
+</div>
+</div>
+<!-- Voice Interaction Area -->
+<div class="w-full flex items-center justify-between gap-6">
+<!-- Finish Early Button -->
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-error transition-colors px-6 py-3 rounded-xl hover:bg-error/10 border border-transparent hover:border-error/20 active:scale-95">
+<span class="material-symbols-outlined">cancel</span>
+<span class="font-label-md">Finish Early</span>
+</button>
+<!-- Waveform Visualizer -->
+<div class="flex-grow flex items-center justify-center gap-1 h-12 px-12" id="waveform-container">
+<!-- Bars generated via JS -->
+</div>
+<!-- Mic Toggle / Status -->
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end">
+<span class="font-label-caps text-tertiary">LISTENING</span>
+<span class="font-label-md text-on-surface-variant">Microphone Active</span>
+</div>
+<div class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary shadow-lg shadow-tertiary/20">
+<span class="material-symbols-outlined">mic</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        // Create dynamic waveform
+        const container = document.getElementById('waveform-container');
+        const barCount = 40;
+        const bars = [];
+
+        for (let i = 0; i < barCount; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'waveform-bar w-1 bg-primary rounded-full opacity-60';
+            bar.style.height = '8px';
+            container.appendChild(bar);
+            bars.push(bar);
+        }
+
+        // Animate waveform
+        function animateWaveform() {
+            bars.forEach(bar => {
+                const randomHeight = Math.floor(Math.random() * 32) + 8;
+                bar.style.height = `${randomHeight}px`;
+                // Add gold tint occasionally
+                if (Math.random() > 0.8) {
+                    bar.style.backgroundColor = 'var(--tw-color-tertiary)';
+                } else {
+                    bar.style.backgroundColor = '';
+                }
+            });
+            requestAnimationFrame(() => {
+                setTimeout(animateWaveform, 100);
+            });
+        }
+
+        animateWaveform();
+
+        // Keyboard interaction simulation
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                const micIcon = document.querySelector('.w-12.h-12');
+                micIcon.classList.toggle('bg-error');
+                micIcon.classList.toggle('bg-tertiary');
+                const label = document.querySelector('.text-tertiary');
+                label.textContent = label.textContent === 'LISTENING' ? 'MUTED' : 'LISTENING';
+                label.classList.toggle('text-error');
+                label.classList.toggle('text-tertiary');
+            }
+        });
+    </script>
+</body></html>
